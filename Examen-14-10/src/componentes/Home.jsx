@@ -1,12 +1,24 @@
-import { useState } from "react";
-function Home() {
-    const [nombre, setNombre] = useState('');
-    return 
-    (
-        <div>
-            <button></button>
-        </div>
-    )
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Home = () => {
+  const nombreRef = useRef('');
+  const navigate = useNavigate();
+
+  const comienzaJuego = () => {
+    const jugadorNombre = nombreRef.current.value;
+    if (jugadorNombre) {
+      navigate('/game', { state: { jugadorNombre } });
+    }
+  };
+
+  return (
+    <div>
+      <h1>JUEGA A ADIVINAR EL JUEGO</h1>
+      <input type="text" placeholder="Ingresa tu nombre" ref={nombreRef} />
+      <button onClick={comienzaJuego}>Comenzar Juego</button>
+    </div>
+  );
 };
 
-export default Home
+export default Home;
